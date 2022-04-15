@@ -15,12 +15,12 @@
 		<semantic:content>
 			<ObjectHeader
 				id="objectHeader"
-				title="{Name}"
-				number="{
+				title="{Invoice}">
+				<!-- number="{
 					path: 'UnitNumber',
 					formatter: '.formatter.currencyValue'
 				}"
-				numberUnit="{UnitOfMeasure}">
+				numberUnit="{UnitOfMeasure}"> -->
 			</ObjectHeader>
 			<IconTabBar
 				id="iconTabBar"

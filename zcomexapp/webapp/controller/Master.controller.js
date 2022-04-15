@@ -10,6 +10,8 @@ sap.ui.define(
     "../model/formatter",
     "../model/grouper",
     "../model/GroupSortState",
+	"sap/ui/unified/FileUploader",
+	"sap/m/MessageBox"
   ],
   function (
     BaseController,
@@ -20,7 +22,9 @@ sap.ui.define(
     Device,
     formatter,
     grouper,
-    GroupSortState
+    GroupSortState,
+	FileUploader,
+	MessageBox
   ) {
     "use strict";
 
@@ -258,9 +262,99 @@ sap.ui.define(
         history.go(-1);
       },
 
+	  onAddPress: function(oEvent) {
+		var that = this;
+		var fileURL;
+		if (!this._oUploadDialog) {
+		  this._oUploadDialog = new sap.m.Dialog({
+			title: "Carregar arquivo CSV",
+			resizable: true,
+			draggable: true,
+			content: [
+			  new FileUploader(this.createId("fileUploader"), {
+				fileType: "csv",
+				uploadComplete: function (oEvent) {
+				  debugger;
+				}.bind(this),
+			  }),
+			],
+			beginButton: new sap.m.Button({
+			  type: "Emphasized",
+			  text: "Upload",
+			  press: this._onLoadData.bind(this),
+			}),
+			endButton: new sap.m.Button({
+			  text: "Close",
+			  press: function () {
+				this._oUploadDialog.close();
+			  }.bind(this),
+			}),
+		  });
+		  this._oUploadDialog.addStyleClass("sapUiContentPadding");
+		  this.getView().addDependent(this._oUploadDialog);
+		}
+		this._oUploadDialog.open();
+	  },
+
+	  
+
+
       /* =========================================================== */
       /* begin: internal methods                                     */
       /* =========================================================== */
+	  _onLoadData: function () {
+		var that = this;
+		var JsonData = FileUpload(that);
+
+		function FileUpload(that) {
+		  var oFileUpload = that.getView().byId("fileUploader");
+		  var domRef = oFileUpload.getFocusDomRef();
+		  var file = domRef.files[0];
+		  var reader = new FileReader();
+
+		  reader.onload = function (e) {
+			var unicode = e.currentTarget.result;
+			csvToJson(unicode, that);
+		  };
+		  reader.readAsBinaryString(file);
+		}
+
+		function csvToJson(csv, that) {
+		  const lines = csv.split("\n");
+		  const result = [];
+		  const headers = lines[0].split(";");
+
+		  for (let i = 1; i < lines.length; i++) {
+			if (!lines[i]) continue;
+			const obj = {};
+			const currentline = lines[i].split(";");
+
+			for (let j = 0; j < headers.length; j++) {
+			  obj[headers[j]] = currentline[j];
+			}
+			result.push(obj);
+		  }
+
+		  var payload = {
+			Key: "1",  
+			Content: JSON.stringify(result),
+		  };
+
+		  debugger;
+		  var oModel = that.getView().getModel();
+		  oModel.create("/UploadSet", payload, {
+			success: function (oData, oResponse) {
+			  debugger;
+			}.bind(this),
+			error: function (oError) {
+			  debugger;
+			  var oSapMessage = JSON.parse(oError.responseText);
+			  var msg = oSapMessage.error.message.value;
+			  MessageBox.error(msg);
+			}.bind(this),
+		  });
+		}
+	  },
 
       _createViewModel: function () {
         return new JSONModel({

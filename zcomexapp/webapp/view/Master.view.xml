@@ -105,10 +105,13 @@
 					text="{i18n>masterGroupNone}"/>
 				<core:Item
 					id="masterGroup1"
-					key="UnitNumber"
+					key="Vendor"
 					text="{i18n>masterGroup1}"/>
 			</semantic:GroupSelect>
 		</semantic:group>
+				<semantic:addAction>
+					<semantic:AddAction press="onAddPress"/>
+				</semantic:addAction>
 
 	</semantic:MasterPage>
 
