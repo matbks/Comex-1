@@ -108,6 +108,14 @@
 						"master",
 						"object"
 					]
+				},
+				{
+					"pattern": "Upload",
+					"name": "upload",
+					"target": [
+						"master",
+						"upload"
+					]
 				}
 			],
 
@@ -121,6 +129,11 @@
 				"object": {
 					"viewName": "Detail",
 					"viewId": "detail",
+					"viewLevel": 2
+				},
+				"upload": {
+					"viewName": "Upload",
+					"viewId": "upload",
 					"viewLevel": 2
 				},
 				"detailObjectNotFound": {
