@@ -1,0 +1,73 @@
+# This is the resource bundle for comex.zcomexapp
+
+#Texts for manifest.json
+
+#XTIT: Application name
+appTitle=Comex App
+
+#YDES: Application description
+appDescription=A Fiori application.
+#~~~ List View ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#XTIT: List view title with placeholder for the number of items
+listTitleCount=InvoiceHeaderSet ({0})
+
+#XTOL: Tooltip for the search field
+listSearchTooltip=Enter an InvoiceHeaderSet name or a part of it.
+
+#XBLI: text for a list with no data
+listListNoDataText=No InvoiceHeaderSet are currently available
+
+#XBLI: text for a list with no data with filter or search
+listListNoDataWithFilterOrSearchText=No matching InvoiceHeaderSet found
+
+#XSEL: Option to sort the list by Invoice
+listSort1=Sort By Invoice
+
+
+
+#~~~ Detail View ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#XTOL: Icon Tab Bar Info
+detailIconTabBarInfo=Info
+
+#XTOL: Icon Tab Bar Attachments
+detailIconTabBarAttachments=Attachments
+
+#XTOL: Tooltip text for close column button
+closeColumn=Close
+
+
+
+#XTIT: Send E-Mail subject
+shareSendEmailObjectSubject=<Email subject including object identifier PLEASE REPLACE ACCORDING TO YOUR USE CASE> {0}
+
+#YMSG: Send E-Mail message
+shareSendEmailObjectMessage=<Email body PLEASE REPLACE ACCORDING TO YOUR USE CASE> {0} (id: {1})\r\n{2}
+
+#XBUT: Text for the send e-mail button
+sendEmail=Send E-Mail
+
+#XTIT: Title text for the price
+priceTitle=Price
+
+#~~~ Not Found View ~~~~~~~~~~~~~~~~~~~~~~~
+
+#XTIT: Not found view title
+notFoundTitle=Not Found
+
+#YMSG: The InvoiceHeaderSet not found text is displayed when there is no InvoiceHeaderSet with this id
+noObjectFoundText=This InvoiceHeaderSet is not available
+
+#YMSG: The not found text is displayed when there was an error loading the resource (404 error)
+notFoundText=The requested resource was not found
+
+#~~~ Not Available View ~~~~~~~~~~~~~~~~~~~~~~~
+
+#XTIT: List view title
+notAvailableViewTitle=InvoiceHeaderSet
+
+#~~~ Error Handling ~~~~~~~~~~~~~~~~~~~~~~~
+
+#YMSG: Error dialog description
+errorText=Sorry, a technical error occurred! Please try again later.

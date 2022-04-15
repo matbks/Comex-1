@@ -4,7 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Master-Detail</title>
+		<title>Comex</title>
 
 		<!-- Bootstrapping UI5 -->
 		<script
@@ -22,14 +22,13 @@
 			sap.ui.getCore().attachInit(function () {
 				sap.ui.require(
 					[
-						// "sap/ui/demo/masterdetail/localService/mockserver",
 						"sap/m/Shell",
 						"sap/ui/core/ComponentContainer",
 					],
-					function (mockserver, Shell, ComponentContainer) {
+					function (Shell, ComponentContainer) {
 						// set up test service for local testing
 						// TODO: remove this when switching to a real service
-						// mockserver.init();
+
 						// initialize the UI component
 						new Shell({
 							app: new ComponentContainer({
