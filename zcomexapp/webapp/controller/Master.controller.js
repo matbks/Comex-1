@@ -117,7 +117,7 @@ sap.ui.define(
 
         if (sQuery) {
           this._oListFilterState.aSearch = [
-            new Filter("Name", FilterOperator.Contains, sQuery),
+            new Filter("Invoice", FilterOperator.Contains, sQuery),
           ];
         } else {
           this._oListFilterState.aSearch = [];

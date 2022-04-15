@@ -41,7 +41,7 @@
 			<Table
 				id="lineItemsList"
 				width="auto"
-				items="{LineItems}"
+				items="{GetInvoiceItems}"
 				updateFinished="onListUpdateFinished"
 				noDataText="{i18n>detailLineItemTableNoDataText}"
 				busyIndicatorDelay="{detailView>/lineItemTableDelay}"
@@ -68,7 +68,7 @@
 					<ColumnListItem>
 						<cells>
 							<ObjectIdentifier
-								title="{Name}"
+								title="{Invoice}"
 								text="{LineItemID}"/>
 							<ObjectNumber
 								number="{

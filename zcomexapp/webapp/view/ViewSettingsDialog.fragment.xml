@@ -14,12 +14,12 @@
 				multiSelect="false">
 				<items>
 					<ViewSettingsItem
-						text="{i18n>masterFilter1}"
-						key="Filter1"
+						text="Invoice"
+						key="Invoice"
 						id="viewFilter1"/>
 					<ViewSettingsItem
-						text="{i18n>masterFilter2}"
-						key="Filter2"
+						text="{i18n>Vendor}"
+						key="Vendor"
 						id="viewFilter2"/>
 				</items>
 			</ViewSettingsFilterItem>

@@ -4,7 +4,7 @@ sap.ui.define([
 	], function (BaseObject, GroupHeaderListItem) {
 		"use strict";
 
-		return BaseObject.extend("comex.zcomexapp.model.ListSelector", {
+		return BaseObject.extend("comex.zcomexapp.controller.ListSelector", {
 
 			/**
 			 * Provides a convenience API for selecting list items. All the functions will wait until the initial load of the a List passed to the instance by the setBoundMasterList

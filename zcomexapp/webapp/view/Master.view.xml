@@ -79,11 +79,11 @@
 				change="onSort">
 				<core:Item
 					id="masterSort1"
-					key="Name"
+					key="Invoice"
 					text="{i18n>masterSort1}"/>
 				<core:Item
 					id="masterSort2"
-					key="UnitNumber"
+					key="Vendor"
 					text="{i18n>masterSort2}"/>
 			</semantic:SortSelect>
 		</semantic:sort>
