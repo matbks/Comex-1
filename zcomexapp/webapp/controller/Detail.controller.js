@@ -113,7 +113,7 @@ sap.ui.define([
                 this.getRouter().getTargets().display("detailObjectNotFound");
                 // if object could not be found, the selection in the list
                 // does not make sense anymore.
-                this.getOwnerComponent().oListSelector.clearListListSelection();
+                this.getOwnerComponent().oListSelector.clearMasterListSelection();
                 return;
             }
 
@@ -153,7 +153,7 @@ sap.ui.define([
         onCloseDetailPress: function () {
             this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", false);
             // No item should be selected on list after detail page is closed
-            this.getOwnerComponent().oListSelector.clearListListSelection();
+            this.getOwnerComponent().oListSelector.clearMasterListSelection();
             this.getRouter().navTo("list");
         },
 
