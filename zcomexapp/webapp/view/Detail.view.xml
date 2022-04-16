@@ -1,8 +1,14 @@
 <mvc:View
 	controllerName="comex.zcomexapp.controller.Detail"
-	xmlns="sap.m"
+	xmlns:m="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.m.semantic">
+	xmlns:semantic="sap.m.semantic"
+	xmlns="sap.uxap"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:layout="sap.ui.layout"
+	
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">>
 
 	<semantic:DetailPage
 		id="page"
@@ -13,73 +19,241 @@
 		busyIndicatorDelay="{detailView>/delay}">
 
 		<semantic:content>
-			<ObjectHeader
-				id="objectHeader"
-				title="{Invoice}">
-				<!-- number="{
-					path: 'UnitNumber',
-					formatter: '.formatter.currencyValue'
-				}"
-				numberUnit="{UnitOfMeasure}"> -->
-			</ObjectHeader>
-			<IconTabBar
-				id="iconTabBar"
-				class="sapUiResponsiveContentPadding">
-				<items>
-					<IconTabFilter
-						id="iconTabBarFilter1"
-						icon="sap-icon://hint"
-						tooltip="{i18n>detailIconTabBarInfo}">
-					</IconTabFilter>
-					<IconTabFilter
-						id="iconTabBarFilter2"
-						icon="sap-icon://attachment"
-						tooltip="{i18n>detailIconTabBarAttachments}">
-					</IconTabFilter>
-				</items>
-			</IconTabBar>
-			<Table
-				id="lineItemsList"
-				width="auto"
-				items="{GetInvoiceItems}"
-				updateFinished="onListUpdateFinished"
-				noDataText="{i18n>detailLineItemTableNoDataText}"
-				busyIndicatorDelay="{detailView>/lineItemTableDelay}"
-				class="sapUiResponsiveMargin">
-				<headerToolbar>
-					<Toolbar id="lineItemsToolbar">
-						<Title
-							id="lineItemsHeader"
-							text="{detailView>/lineItemListTitle}"/>
-					</Toolbar>
-				</headerToolbar>
-				<columns>
-					<Column>
-						<Text text="{i18n>detailLineItemTableIDColumn}"/>
-					</Column>
-					<Column
-						minScreenWidth="Tablet"
-						demandPopin="true"
-						hAlign="End">
-						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
-					</Column>
-				</columns>
-				<items>
-					<ColumnListItem>
-						<cells>
-							<ObjectIdentifier
-								title="{Invoice}"
-								text="{LineItemID}"/>
-							<ObjectNumber
-								number="{
-									path: 'UnitNumber',
-									formatter: '.formatter.currencyValue'
-								}"
-								unit="{UnitOfMeasure}"/>
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
+			<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false"  showTitleInHeaderContent="true"  showHeaderContent="true">
+					
+				<headerTitle>
+					
+						<ObjectPageHeader objectImageURI="sap-icon://my-sales-order"
+							objectImageShape="Circle"
+							objectTitle="Invoice {Invoice}"
+							objectSubtitle="{TradeVendorName}" 
+							objectImageAlt="Senior UI Developer"
+							id="ObjectPageLayoutHeaderTitle"
+							isObjectIconAlwaysVisible="false"
+							isObjectTitleAlwaysVisible="false"
+							showPlaceholder="true">
+							<actions>
+								<ObjectPageHeaderActionButton icon="sap-icon://pull-down" text="show section" type="Emphasized"/>
+								<ObjectPageHeaderActionButton icon="sap-icon://show" text="show state" type="Emphasized"/>
+							</actions>
+  						</ObjectPageHeader>
+					
+				</headerTitle>
+		
+				<headerContent>
+					<m:HBox>
+					<m:VBox>
+						<layout:VerticalLayout>
+							<m:ObjectStatus title="Tipo Invoice" text="{Type}"/>
+							<m:ObjectStatus title="Moeda" text="{Currency}"/>
+							<m:ObjectStatus title="Taxa Câmbio" text="{Exchangerate}"/>
+							<m:ObjectStatus title="Data Referência" text="Falta trazer"/>
+						</layout:VerticalLayout>
+					</m:VBox>
+					<m:VBox
+					width="20px"/>
+					<m:VBox >	
+						<layout:VerticalLayout > 
+							<m:ObjectStatus title="Montante Total" text="{Totalamount}" />
+							<m:ObjectStatus title="Total de Frete" text="{Totalfreight}"/>
+							<m:ObjectStatus title="Total de Seguro" text="{Totalinsurance}"/>
+						</layout:VerticalLayout>
+					</m:VBox>
+					<m:VBox
+					width="20px"/>
+					<m:VBox  >
+						<layout:VerticalLayout>
+							<m:ObjectStatus title="Total DA" text="{Totaldami} {Currency}" />
+							<m:ObjectStatus title="Total Sicomex" text="{Totalsicomexmi} {Localcurrency}" />
+						</layout:VerticalLayout>
+					</m:VBox>	
+					</m:HBox>	
+				
+				</headerContent>
+			
+				<sections>
+					
+					<ObjectPageSection title="Fatura Fornecedor">
+						<ObjectPageSubSection title= "Documento" titleUppercase="true">
+							<blocks>
+								<f:SimpleForm id="SimpleFormChange480_12120"
+									editable="true"
+									layout="ResponsiveGridLayout"
+									title=""
+									labelSpanXL="4"
+									labelSpanL="4"
+									labelSpanM="12"
+									labelSpanS="12"
+									adjustLabelSpan="false"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									emptySpanS="0"
+									columnsXL="2"
+									columnsL="2"
+									columnsM="1"
+									singleContainerFullSize="false" >
+									<f:content>
+										<m:Label text="Fatura" />
+										<m:Text text="5105640678/2021" />
+										<m:Label text="Data Lançamento" />
+										<m:Text text="15.09.2021" />
+									</f:content>
+									<m:Button width="200px"
+										icon="sap-icon://accept"	
+										text="Lançar Fatura"
+										type="Accept"
+										/>
+									<m:Button width="200px"
+										icon="sap-icon://decline"	
+										text="Estornar"
+										type="Reject"
+										/>	
+								</f:SimpleForm>	
+							</blocks>
+													
+						</ObjectPageSubSection>
+						
+						<ObjectPageSubSection title="Invoice Itens" titleUppercase="true">
+							<blocks>
+							<smartTable:SmartTable
+										id="InvoiceItemsSmartTable"
+										entitySet="InvoiceItemsSet"
+										tableBindingPath="GetInvoiceItems"
+										tableType="ResponsiveTable"
+										useVariantManagement="true"
+										useTablePersonalisation="true"
+										header="Invoice Items"
+										persistencyKey="SmartTableAnalytical_Explored"
+										enableAutoBinding="true"
+										showFullScreenButton="true"
+										class="sapUiResponsiveContentPadding"
+										initiallyVisibleFields="InvoiceItem,PurchaseOrder,PurchaseItem,Material,MaterialDescription,Quantity,Amount"
+									/>
+							</blocks>
+							
+						</ObjectPageSubSection>
+					</ObjectPageSection>
+		
+					<ObjectPageSection title="Debitos Posteriores">
+						<ObjectPageSubSection>
+							
+
+						</ObjectPageSubSection>
+					</ObjectPageSection>
+					
+					<ObjectPageSection title="NF-E Manual">
+						<ObjectPageSubSection>
+							<blocks>
+								<f:SimpleForm id="Manul"
+									editable="true"
+									layout="ResponsiveGridLayout"
+									title=""
+									labelSpanXL="4"
+									labelSpanL="4"
+									labelSpanM="12"
+									labelSpanS="12"
+									adjustLabelSpan="false"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									emptySpanS="0"
+									columnsXL="2"
+									columnsL="2"
+									columnsM="1"
+									singleContainerFullSize="false" >
+									<f:content>
+										<m:Label text="Nº Documento"/>
+										<m:Text text="549204" />
+										<m:Label text="Data Lançamento" />
+										<m:Text text="16.09.2021" />
+									</f:content>
+									<m:Button width="300px"
+										icon="sap-icon://accept"	
+										text="Lançar NF-e"
+										type="Accept"
+										/>
+									
+								</f:SimpleForm>	
+							</blocks>
+
+						</ObjectPageSubSection>
+					</ObjectPageSection>
+					
+					<ObjectPageSection title="Contabilização">
+						<ObjectPageSubSection>						
+							<blocks>
+								<f:SimpleForm id="Contabilizations"
+									editable="true"
+									layout="ResponsiveGridLayout"
+									title=""
+									labelSpanXL="4"
+									labelSpanL="4"
+									labelSpanM="12"
+									labelSpanS="12"
+									adjustLabelSpan="false"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									emptySpanS="0"
+									columnsXL="2"
+									columnsL="2"
+									columnsM="1"
+									singleContainerFullSize="false" >
+									<f:content>
+										<m:Label text="Documento Contábil" />
+										<m:Text text="190000203/2021" />
+										<m:Label text="Data Lançamento" />
+										<m:Text text="16.09.2021" />
+									</f:content>
+									<m:Button width="220px"
+										icon="sap-icon://accept"	
+										text="Lançar Contabilização"
+										type="Accept"
+										/>
+									<m:Button width="220px"
+										icon="sap-icon://decline"	
+										text="Estornar Contabilizaçao"
+										type="Reject"
+										/>	
+								</f:SimpleForm>	
+							</blocks>								
+					</ObjectPageSubSection>
+						<ObjectPageSubSection title="Conta Contábil" titleUppercase="true">
+							<blocks>
+								<smartTable:SmartTable id="Contabilization" entitySet="InvoiceHeaderSet" 
+								    tableType="Table" useExportToExcel="true" 
+									beforeExport="onBeforeExport" useVariantManagement="false" useTablePersonalisation="true" 
+									 persistencyKey="SmartTableAnalytical_Explored" 
+									enableAutoBinding="true" class="sapUiResponsiveContentPadding" initiallyVisibleFields="Invoice,Vendor">
+										<!-- layout data used to make the table growing but the filter bar fixed -->
+										<smartTable:layoutData>
+												<m:FlexItemData growFactor="1" baseSize="0%"/>
+										</smartTable:layoutData>
+								</smartTable:SmartTable>
+							</blocks> 
+
+						</ObjectPageSubSection>
+					</ObjectPageSection>
+					
+					<ObjectPageSection title="Histórico">
+						<ObjectPageSubSection>
+							<m:HBox>
+								<m:VBox >
+									<m:Label text="Forma de Pagamento"/>
+									<m:RadioButtonGroup id="Paymsewrssent" columns="4" width="100%" class="sapUiMediumMarginBottom">
+									<m:RadioButton id="Paymendewrst-s1" text="Cartão de Crédito" />
+									<m:RadioButton id="Paymerewfsnt-s2" text="Cartão de Débito" />
+									<m:RadioButton id="paysmerwednts-3" text="Pix" />
+									<m:RadioButton id="paymefrewsnt-s4" text="Dinheiro" />
+									</m:RadioButtonGroup>
+								</m:VBox>
+							</m:HBox>   
+						</ObjectPageSubSection>
+					</ObjectPageSection>
+				</sections>
+		
+			</ObjectPageLayout>
 		</semantic:content>
 
 		<semantic:sendEmailAction>

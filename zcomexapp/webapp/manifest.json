@@ -24,6 +24,7 @@
 	},
 
 	"sap.ui": {
+		"fullWidth": true,
 		"technology": "UI5",
 		"icons": {
 			"icon": "sap-icon://detail-view",

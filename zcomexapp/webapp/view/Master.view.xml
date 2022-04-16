@@ -15,6 +15,7 @@
 				<contentMiddle>
 					<SearchField
 						id="searchField"
+						placeholder="Pesquisar"
 						showRefreshButton="{= !${device>/support/touch} }"
 						tooltip="{i18n>masterSearchTooltip}"
 						width="100%"
@@ -61,12 +62,20 @@
 				<items>
 					<ObjectListItem
 						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
-						title="{Invoice}">
+						title="Invoice">
+						
 						<!-- number="{
 							path: 'UnitNumber',
 							formatter: '.formatter.currencyValue'
 						}"
 						numberUnit="{UnitOfMeasure}"> -->
+						
+						<attributes>
+							<ObjectAttribute text="{Invoice}" />
+							<ObjectAttribute text="DAHONG DOWN PRODUCTS CO LTD" />
+							<ObjectAttribute text="Data Ref: 07.09.2021" />
+						</attributes>
+						
 					</ObjectListItem>
 				</items>
 			</List>

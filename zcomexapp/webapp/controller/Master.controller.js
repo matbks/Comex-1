@@ -272,6 +272,7 @@ sap.ui.define(
             draggable: true,
             content: [
               new FileUploader(this.createId("fileUploader"), {
+                uploadUrl: "{masterView>/uploadUrl}",
                 fileType: "csv",
                 change: function (oEvent) {
                   this.getModel("masterView").setProperty(
@@ -295,6 +296,9 @@ sap.ui.define(
               }.bind(this),
             }),
           });
+          debugger;
+          var teste = this.byId("fileUploader");
+          this.getModel("masterView").setProperty("/uploadUrl", "");
           this._oUploadDialog.addStyleClass("sapUiContentPadding");
           this.getView().addDependent(this._oUploadDialog);
         }
@@ -374,6 +378,7 @@ sap.ui.define(
           sortBy: "Name",
           groupBy: "None",
           uploadButton: false,
+          uploadUrl: "",
         });
       },
 
@@ -418,6 +423,10 @@ sap.ui.define(
        */
       _showDetail: function (oItem) {
         var bReplace = !Device.system.phone;
+debugger;
+        var teste = oItem.getBindingContext().getProperty("Vendor");
+
+
         this.getRouter().navTo(
           "object",
           {
