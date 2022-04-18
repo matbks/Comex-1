@@ -3,33 +3,10 @@
 	xmlns:layout="sap.ui.layout"
 	xmlns:core="sap.ui.core"
 >
-	<m:HBox>
 	<m:VBox>
-	
-
-
-	</m:HBox>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<m:VBox>
-	<m:ObjectStatus
+		<m:HBox>
+			<m:VBox>
+				<m:ObjectStatus
 					title="{i18n>vendorName}"
 					text="{Vendor} - {VendorName} ({VendorCountry})"
 				/>
@@ -70,14 +47,12 @@
 						}
 					}"
 				/>
-	</m:VBox>
-
-
-	<m:VBox>
-
-	<m:HBox>
-
-	<m:ObjectStatus
+			</m:VBox>
+		</m:HBox>
+		<m:HBox height="20px"/>
+		<m:HBox>
+			<m:VBox>
+				<m:ObjectStatus
 					title="{i18n>totalAmount}"
 					text="{
 						parts: [{
@@ -119,13 +94,10 @@
 						}
 					}"
 				/>
-
-	</m:HBox>
-
-	<m:HBox> 
-	
-
-	<m:ObjectStatus
+			</m:VBox>
+			<m:VBox width="100px"/>
+			<m:VBox>
+				<m:ObjectStatus
 					title="{i18n>totalDA}"
 					text="{
 						parts: [{
@@ -153,14 +125,9 @@
 						}
 					}"
 				/>
-
-	</m:HBox>
-
+			</m:VBox>
+		</m:HBox>
 	</m:VBox>
-	
-
-
-
 	<!-- <m:HBox>
 		<m:VBox>
 			<layout:VerticalLayout>

@@ -2,12 +2,20 @@
 	xmlns="sap.m"
 	xmlns:c="sap.ui.core"
 >
-	<Table items="{
-		path: 'GetLaterDebtHeader',
-		sorter: {
-			path: 'Invoice'
-		}
-	}">
+	<Table
+		id="laterDebtsTable"
+		width="auto"
+		updateFinished="onTableLaterDebtsUpdateFinished"
+		noDataText="{i18n>detailLineItemTableNoDataText}"
+		busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+		class="sapUiResponsiveMargin"
+		items="{
+			path: 'GetLaterDebtHeader',
+			sorter: {
+				path: 'Invoice'
+			}
+		}"
+	>
 		<headerToolbar>
 			<Toolbar>
 				<Title
@@ -63,11 +71,12 @@
 					/>
 					<Text text="{LaterDebtDocument}/{LaterDebtDocumentYear}"/>
 					<Button
-						text="Lançar"
-						type="Accept"
-						icon="sap-icon://accept"
+						text="{detailView>/buttons/laterDebts/text}"
+						type="{detailView>/buttons/laterDebts/type}"
+						icon="{detailView>/buttons/laterDebts/icon}"
 						width="100px"
 						visible="true"
+						enabled="true"
 						iconDensityAware="false"
 					/>
 				</cells>

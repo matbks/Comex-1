@@ -5,16 +5,16 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
     "sap/m/MessagePopover",
-    "sap/m/MessagePopoverItem",
     "sap/m/MessageBox",
+    "sap/m/MessagePopoverItem",
   ],
   function (
     BaseController,
     JSONModel,
     formatter,
     MessagePopover,
-    MessagePopoverItem,
-    MessageBox
+    MessageBox,
+    MessagePopoverItem
   ) {
     "use strict";
 
@@ -35,6 +35,14 @@ sap.ui.define(
           lineItemListTitle: this.getResourceBundle().getText(
             "detailLineItemTableHeading"
           ),
+          buttons: {
+            laterDebts: {
+              text: "",
+              type: "Accept",
+              icon: "",
+              enable: false,
+            },
+          },
         });
 
         this.getRouter()
@@ -58,9 +66,9 @@ sap.ui.define(
           new sap.ui.core.message.Message({
             message: "Something wrong happened",
             type: sap.ui.core.MessageType.Error,
-            processor: oMessageProcessor
+            processor: oMessageProcessor,
           })
-      );
+        );
       },
 
       /* =========================================================== */
@@ -68,31 +76,17 @@ sap.ui.define(
       /* =========================================================== */
 
       /**
-       * Event handler when the share by E-Mail button has been clicked
-       * @public
-       */
-      onShareEmailPress: function () {
-        var oViewModel = this.getModel("detailView");
-
-        sap.m.URLHelper.triggerEmail(
-          null,
-          oViewModel.getProperty("/shareSendEmailSubject"),
-          oViewModel.getProperty("/shareSendEmailMessage")
-        );
-      },
-
-      /**
        * Updates the item count within the line item table's header
        * @param {object} oEvent an event containing the total number of items in the list
        * @private
        */
-      onListUpdateFinished: function (oEvent) {
+      onTableLaterDebtsUpdateFinished: function (oEvent) {
         var sTitle,
           iTotalItems = oEvent.getParameter("total"),
           oViewModel = this.getModel("detailView");
 
         // only update the counter if the length is final
-        if (this.byId("lineItemsList").getBinding("items").isLengthFinal()) {
+        if (this.byId("laterDebtsTable").getBinding("items").isLengthFinal()) {
           if (iTotalItems) {
             sTitle = this.getResourceBundle().getText(
               "detailLineItemTableHeadingCount",
