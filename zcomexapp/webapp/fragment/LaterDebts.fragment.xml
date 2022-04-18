@@ -1,0 +1,77 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+	<Table items="{
+		path: 'GetLaterDebtHeader',
+		sorter: {
+			path: 'Invoice'
+		}
+	}">
+		<headerToolbar>
+			<Toolbar>
+				<Title
+					text="Products"
+					level="H2"
+				/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>issuerName}"/>
+			</Column>
+			<Column>
+				<Text text="{/#LaterDebtHeader/Amount/@sap:label}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>detail}"/>
+			</Column>
+			<Column>
+				<Text text="{/#LaterDebtHeader/LaterDebtDocument/@sap:label}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>action}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<ObjectIdentifier
+						title="{InvoiceIssuer}"
+						text="{InvoiceIssuerName}"
+					/>
+					<Text
+						text="{
+							parts: [{
+								path: 'Amount'
+							}, {
+								path: 'Currency'
+							}],
+							type: 'sap.ui.model.type.Currency',
+							formatOptions: {
+								showMeasure: true
+							}
+						}"
+						wrapping="false"
+					/>
+					<Button
+						text=""
+						icon="sap-icon://detail-view"
+						width="50px"
+						iconDensityAware="false"
+					/>
+					<Text text="{LaterDebtDocument}/{LaterDebtDocumentYear}"/>
+					<Button
+						text="Lançar"
+						type="Accept"
+						icon="sap-icon://accept"
+						width="100px"
+						visible="true"
+						iconDensityAware="false"
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</c:FragmentDefinition>

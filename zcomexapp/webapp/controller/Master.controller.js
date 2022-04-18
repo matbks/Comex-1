@@ -172,7 +172,7 @@ sap.ui.define(
       onOpenViewSettings: function () {
         if (!this._oViewSettingsDialog) {
           this._oViewSettingsDialog = sap.ui.xmlfragment(
-            "sap.ui.demo.masterdetail.view.ViewSettingsDialog",
+            "comex.zcomexapp.fragment.ViewSettingsDialog",
             this
           );
           this.getView().addDependent(this._oViewSettingsDialog);
@@ -267,13 +267,13 @@ sap.ui.define(
         var fileURL;
         if (!this._oUploadDialog) {
           this._oUploadDialog = new sap.m.Dialog({
-            title: "Carregar arquivo CSV",
+            title: "{i18n>loadFile}",
             resizable: true,
             draggable: true,
             content: [
               new FileUploader(this.createId("fileUploader"), {
-                uploadUrl: "{masterView>/uploadUrl}",
                 fileType: "csv",
+                value: "{masterView>/uploadInicialValue}",
                 change: function (oEvent) {
                   this.getModel("masterView").setProperty(
                     "/uploadButton",
@@ -285,23 +285,22 @@ sap.ui.define(
             ],
             beginButton: new sap.m.Button(this.createId("buttonUpload"), {
               type: "Emphasized",
-              text: "Upload",
+              text: "{i18n>upload}",
               visible: "{masterView>/uploadButton}",
               press: this._onLoadData.bind(this),
             }),
             endButton: new sap.m.Button({
-              text: "Close",
+              text: "{i18n>close}",
               press: function () {
                 this._oUploadDialog.close();
               }.bind(this),
             }),
           });
-          debugger;
-          var teste = this.byId("fileUploader");
-          this.getModel("masterView").setProperty("/uploadUrl", "");
           this._oUploadDialog.addStyleClass("sapUiContentPadding");
           this.getView().addDependent(this._oUploadDialog);
         }
+        this.getModel("masterView").setProperty("/uploadButton", false);
+        this.getModel("masterView").setProperty("/uploadInicialValue", "");
         this._oUploadDialog.open();
       },
 
@@ -349,7 +348,6 @@ sap.ui.define(
           var oModel = that.getView().getModel();
           oModel.create("/UploadSet", payload, {
             success: function (oData, oResponse) {
-              debugger;
               var oSapMessage = JSON.parse(oResponse.headers["sap-message"]);
 
               if (oSapMessage.severity === "error") {
@@ -359,7 +357,6 @@ sap.ui.define(
               }
             }.bind(this),
             error: function (oError) {
-              debugger;
               var oSapMessage = JSON.parse(oError.responseText);
               var msg = oSapMessage.error.message.value;
               MessageBox.error(msg);
@@ -378,7 +375,7 @@ sap.ui.define(
           sortBy: "Name",
           groupBy: "None",
           uploadButton: false,
-          uploadUrl: "",
+          uploadInicialValue: "",
         });
       },
 
@@ -423,9 +420,7 @@ sap.ui.define(
        */
       _showDetail: function (oItem) {
         var bReplace = !Device.system.phone;
-debugger;
         var teste = oItem.getBindingContext().getProperty("Vendor");
-
 
         this.getRouter().navTo(
           "object",

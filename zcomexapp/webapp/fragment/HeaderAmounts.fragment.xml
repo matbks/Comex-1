@@ -1,0 +1,291 @@
+<core:FragmentDefinition
+	xmlns:m="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+>
+	<m:HBox>
+	<m:VBox>
+	
+
+
+	</m:HBox>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<m:VBox>
+	<m:ObjectStatus
+					title="{i18n>vendorName}"
+					text="{Vendor} - {VendorName} ({VendorCountry})"
+				/>
+				<m:ObjectStatus
+					title="{i18n>tradeName}"
+					text="{TradeVendor} - {TradeVendorName}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>invoiceType}"
+					text="{Type}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>currency}"
+					text="{Currency}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>exchangeRate}"
+					text="{
+						parts: [{
+							path: 'ExchangeRate'
+						}, {
+							path: 'Currency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: false,
+							decimals: 5
+						}
+					}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>referenceDate}"
+					text="{
+						path: 'ReferenceDate',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							style: 'medium'
+						}
+					}"
+				/>
+	</m:VBox>
+
+
+	<m:VBox>
+
+	<m:HBox>
+
+	<m:ObjectStatus
+					title="{i18n>totalAmount}"
+					text="{
+						parts: [{
+							path: 'TotalAmount'
+						}, {
+							path: 'Currency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>totalFreight}"
+					text="{
+						parts: [{
+							path: 'TotalFreight'
+						}, {
+							path: 'Currency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>toralInsurance}"
+					text="{
+						parts: [{
+							path: 'TotalInsurance'
+						}, {
+							path: 'Currency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+
+	</m:HBox>
+
+	<m:HBox> 
+	
+
+	<m:ObjectStatus
+					title="{i18n>totalDA}"
+					text="{
+						parts: [{
+							path: 'TotalDaMi'
+						}, {
+							path: 'LocalCurrency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>totalSiscomex}"
+					text="{
+						parts: [{
+							path: 'TotalSicomexMi'
+						}, {
+							path: 'LocalCurrency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+
+	</m:HBox>
+
+	</m:VBox>
+	
+
+
+
+	<!-- <m:HBox>
+		<m:VBox>
+			<layout:VerticalLayout>
+				<m:ObjectStatus
+					title="{i18n>vendorName}"
+					text="{Vendor} - {VendorName} ({VendorCountry})"
+				/>
+				<m:ObjectStatus
+					title="{i18n>tradeName}"
+					text="{TradeVendor} - {TradeVendorName}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>invoiceType}"
+					text="{Type}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>currency}"
+					text="{Currency}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>exchangeRate}"
+					text="{
+						parts: [{
+							path: 'ExchangeRate'
+						}, {
+							path: 'Currency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: false,
+							decimals: 5
+						}
+					}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>referenceDate}"
+					text="{
+						path: 'ReferenceDate',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							style: 'medium'
+						}
+					}"
+				/>
+			</layout:VerticalLayout>
+		</m:VBox>
+		<m:VBox width="20px"/>
+		<m:VBox>
+			<layout:VerticalLayout>
+				<m:ObjectStatus
+					title="{i18n>totalAmount}"
+					text="{
+						parts: [{
+							path: 'TotalAmount'
+						}, {
+							path: 'Currency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>totalFreight}"
+					text="{
+						parts: [{
+							path: 'TotalFreight'
+						}, {
+							path: 'Currency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>toralInsurance}"
+					text="{
+						parts: [{
+							path: 'TotalInsurance'
+						}, {
+							path: 'Currency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+			</layout:VerticalLayout>
+		</m:VBox>
+		<m:VBox width="20px"/>
+		<m:VBox>
+			<layout:VerticalLayout>
+				<m:ObjectStatus
+					title="{i18n>totalDA}"
+					text="{
+						parts: [{
+							path: 'TotalDaMi'
+						}, {
+							path: 'LocalCurrency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+				<m:ObjectStatus
+					title="{i18n>totalSiscomex}"
+					text="{
+						parts: [{
+							path: 'TotalSicomexMi'
+						}, {
+							path: 'LocalCurrency'
+						}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: true
+						}
+					}"
+				/>
+			</layout:VerticalLayout>
+		</m:VBox>
+	</m:HBox> -->
+</core:FragmentDefinition>
