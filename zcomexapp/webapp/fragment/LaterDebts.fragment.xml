@@ -76,8 +76,9 @@
 						icon="{detailView>/buttons/laterDebts/icon}"
 						width="100px"
 						visible="true"
-						enabled="true"
+						enabled="{detailView>/buttons/laterDebts/enabled}"
 						iconDensityAware="false"
+						press="onLaterDebtsPress"
 					/>
 				</cells>
 			</ColumnListItem>

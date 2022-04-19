@@ -5,16 +5,14 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
     "sap/m/MessagePopover",
-    "sap/m/MessageBox",
-    "sap/m/MessagePopoverItem",
+    "sap/m/MessageBox"
   ],
   function (
     BaseController,
     JSONModel,
     formatter,
     MessagePopover,
-    MessageBox,
-    MessagePopoverItem
+    MessageBox
   ) {
     "use strict";
 
@@ -102,30 +100,31 @@ sap.ui.define(
         }
       },
 
-      onInvoicePost: function () {
-        var result = [];
-        result.push("teste");
-
-        var payload = {
-          Key: "1",
-          Content: JSON.stringify(result),
+      onNfWritePost: function () {
+        var payload = oEvent.getSource().getBindingContext().getObject();
+        if (payload.NfeDocument === ''){
+          payload.Action = 'D';
+        } else { 
+          return
         };
 
         var oModel = this.getView().getModel();
         oModel.create("/InvoiceHeaderSet", payload, {
           success: function (oData, oResponse) {
-            var oSapMessage = JSON.parse(oResponse.headers["sap-message"]);
+            debugger;
+            // var oSapMessage = JSON.parse(oResponse.headers["sap-message"]);
 
-            if (oSapMessage.severity === "error") {
-              MessageBox.error(oSapMessage.message);
-            } else {
-              MessageBox.success(oSapMessage.message);
-            }
+            // if (oSapMessage.severity === "error") {
+            //   MessageBox.error(oSapMessage.message);
+            // } else {
+            //   MessageBox.success(oSapMessage.message);
+            // }
           }.bind(this),
           error: function (oError) {
-            var oSapMessage = JSON.parse(oError.responseText);
-            var msg = oSapMessage.error.message.value;
-            MessageBox.error(msg);
+            debugger;
+            // var oSapMessage = JSON.parse(oError.responseText);
+            // var msg = oSapMessage.error.message.value;
+            // MessageBox.error(msg);
           }.bind(this),
         });
       },
@@ -136,7 +135,8 @@ sap.ui.define(
           this._messagePopover = new MessagePopover({
             items: {
               path: "message>/",
-              template: new MessagePopoverItem({
+              initiallyExpanded: true,
+              template: new sap.m.MessageItem({
                 description: "{message>description}",
                 type: "{message>type}",
                 title: "{message>message}",
@@ -148,6 +148,47 @@ sap.ui.define(
           oMessagesButton.addDependent(this._messagePopover);
         }
         this._messagePopover.toggle(oMessagesButton);
+      },
+
+      onInvoicePost: function (oEvent) {
+        debugger;
+        var payload = oEvent.getSource().getBindingContext().getObject();
+        if (payload.VendorInvoice === "") {
+          payload.Action = "B";
+        } else {
+          payload.Action = "F";
+        }
+        var oModel = this.getView().getModel();
+        oModel.create("/InvoiceHeaderSet", payload, {
+          success: function (oData, oResponse) {
+            debugger;
+          }.bind(this),
+          error: function (oError) {
+            debugger;
+          }.bind(this),
+        });
+      },
+
+      onLaterDebtsPress: function (oEvent) {
+        var payload = oEvent.getSource().getBindingContext().getObject();
+        var oModel = this.getView().getModel();
+        oModel.create("/LaterDebtHeaderSet", payload, {
+          success: function (oData, oResponse) {
+            debugger;
+            // var oSapMessage = JSON.parse(oResponse.headers["sap-message"]);
+            // if (oSapMessage.severity === "error") {
+            //   MessageBox.error(oSapMessage.message);
+            // } else {
+            //   MessageBox.success(oSapMessage.message);
+            // }
+          }.bind(this),
+          error: function (oError) {
+            debugger;
+            // var oSapMessage = JSON.parse(oError.responseText);
+            // var msg = oSapMessage.error.message.value;
+            // MessageBox.error(msg);
+          }.bind(this),
+        });
       },
 
       /* =========================================================== */

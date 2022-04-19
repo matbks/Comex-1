@@ -103,6 +103,7 @@
 										text="Lançar Fatura"
 										type="Accept"
 										visible="{= ${VendorInvoice} === ''}"
+										press="onInvoicePost"
 									/>
 									<m:Button
 										width="200px"
@@ -121,8 +122,6 @@
 									entitySet="InvoiceItemsSet"
 									tableBindingPath="GetInvoiceItems"
 									tableType="ResponsiveTable"
-									useVariantManagement="true"
-									useTablePersonalisation="true"
 									header=""
 									persistencyKey="SmartTableAnalytical_Explored"
 									showFullScreenButton="true"
@@ -174,7 +173,7 @@
 										icon="sap-icon://accept"
 										text="Lançar NF-e"
 										type="Accept"
-										press="onInvoicePost"
+										press="onNfWritePost"
 									/>
 								</f:SimpleForm>
 							</blocks>
