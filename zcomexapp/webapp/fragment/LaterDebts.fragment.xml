@@ -69,7 +69,10 @@
 						width="50px"
 						iconDensityAware="false"
 					/>
-					<Text text="{LaterDebtDocument}/{LaterDebtDocumentYear}"/>
+					<Text
+						text="{LaterDebtDocument}/{LaterDebtDocumentYear}"
+						visible="{= ${LaterDebtDocument} !== ''}"
+					/>
 					<Button
 						text="{detailView>/buttons/laterDebts/text}"
 						type="{detailView>/buttons/laterDebts/type}"

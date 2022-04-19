@@ -93,7 +93,27 @@
 											visible="{= ${VendorInvoice} !== ''}"
 										/>
 										<m:Text
-											text="{VendorInvoiceDate}"
+											text="{
+												path: 'VendorInvoiceDate',
+												type: 'sap.ui.model.type.Date',
+												formatOptions: {
+													style: 'short'
+												}
+											}"
+											visible="{= ${VendorInvoice} !== ''}"
+										/>
+										<m:Label
+											text="{i18n>createdOn}"
+											visible="{= ${VendorInvoice} !== ''}"
+										/>
+										<m:Text
+											text="{
+												path: 'VendorInvoiceCreatedOn',
+												type: 'sap.ui.model.type.DateTime',
+												formatOptions: {
+													style: 'medium'
+												}
+											}"
 											visible="{= ${VendorInvoice} !== ''}"
 										/>
 									</f:content>
@@ -111,6 +131,7 @@
 										text="Estornar"
 										type="Reject"
 										visible="{= ${VendorInvoice} !== ''}"
+										press="onInvoicePost"
 									/>
 								</f:SimpleForm>
 							</blocks>
@@ -173,7 +194,7 @@
 										icon="sap-icon://accept"
 										text="Lançar NF-e"
 										type="Accept"
-										press="onNfWritePost"
+										press="onInvoicePost"
 									/>
 								</f:SimpleForm>
 							</blocks>

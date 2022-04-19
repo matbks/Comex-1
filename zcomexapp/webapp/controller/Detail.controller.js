@@ -100,7 +100,7 @@ sap.ui.define(
         }
       },
 
-      onNfWritePost: function () {
+      onNfWritePost: function (oEvent) {
         var payload = oEvent.getSource().getBindingContext().getObject();
         if (payload.NfeDocument === ''){
           payload.Action = 'D';

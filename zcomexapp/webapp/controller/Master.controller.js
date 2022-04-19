@@ -107,22 +107,16 @@ sap.ui.define(
        * @param {sap.ui.base.Event} oEvent the search event
        * @public
        */
-      onSearch: function (oEvent) {
-        if (oEvent.getParameters().refreshButtonPressed) {
-          // Search field's 'refresh' button has been pressed.
-          // This is visible if you select any master list item.
-          // In this case no new search is triggered, we only
-          // refresh the list binding.
-          this.onRefresh();
-          return;
-        }
-
-        var sQuery = oEvent.getParameter("query");
-
-        if (sQuery) {
-          this._oListFilterState.aSearch = [
-            new Filter("Invoice", FilterOperator.Contains, sQuery),
-          ];
+       onSearch: function (oEvent) {
+        var sQuery = oEvent.getSource().getValue();
+        if (sQuery && sQuery.length > 0) {
+          this._oListFilterState.aSearch = 
+            new Filter({
+                filters:[
+                  new sap.ui.model.Filter("Invoice", sap.ui.model.FilterOperator.Contains, sQuery),
+                  new sap.ui.model.Filter("Vendorname", sap.ui.model.FilterOperator.Contains, sQuery)
+                ], and: false
+            })
         } else {
           this._oListFilterState.aSearch = [];
         }

@@ -19,7 +19,7 @@
 						showRefreshButton="{= !${device>/support/touch} }"
 						tooltip="{i18n>masterSearchTooltip}"
 						width="100%"
-						search="onSearch">
+						liveChange="onSearch">
 					</SearchField>
 				</contentMiddle>
 			</Bar>
