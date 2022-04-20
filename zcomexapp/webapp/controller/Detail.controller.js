@@ -63,13 +63,13 @@ sap.ui.define(
 
         this._oMessageManager.registerMessageProcessor(oMessageProcessor);
 
-        this._oMessageManager.addMessages(
-          new sap.ui.core.message.Message({
-            message: "Something wrong happened",
-            type: MessageType.Error,
-            processor: oMessageProcessor,
-          })
-        );
+        // this._oMessageManager.addMessages(
+        //   new sap.ui.core.message.Message({
+        //     message: "Something wrong happened",
+        //     type: MessageType.Error,
+        //     processor: oMessageProcessor,
+        //   })
+        // );
       },
 
       /* =========================================================== */
