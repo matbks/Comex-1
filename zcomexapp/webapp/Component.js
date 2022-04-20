@@ -4,7 +4,7 @@ sap.ui.define([
 		"./model/models",
 		"./controller/ListSelector",
 		"./controller/ErrorHandler"
-	], function (UIComponent, Device, models, ListSelector, ErrorHandler) {
+	], function (UIComponent, Device, models, ListSelector, ErrorHandler, CustomMessagePopover) {
 		"use strict";
 
 		return UIComponent.extend("comex.zcomexapp.Component", {
@@ -21,6 +21,7 @@ sap.ui.define([
 			 */
 			init : function () {
 				this.oListSelector = new ListSelector();
+				// this.oCustomMessage = new CustomMessagePopover();
 				this._oErrorHandler = new ErrorHandler(this);
 
 				// set the device model

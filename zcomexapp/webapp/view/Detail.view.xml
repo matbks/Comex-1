@@ -224,7 +224,7 @@
 								>
 									<f:content>
 										<m:Label text="Documento Contábil"/>
-										<m:Text text="190000203/2021"/>
+										<m:Text text="{AccountDocument}{AccountDocumentCompany}/{AccountDocumentYear}"/>
 										<m:Label text="Data Lançamento"/>
 										<m:Text text="16.09.2021"/>
 									</f:content>
@@ -233,12 +233,14 @@
 										icon="sap-icon://accept"
 										text="Lançar Contabilização"
 										type="Accept"
+										press="onAccountPost"
 									/>
 									<m:Button
 										width="220px"
 										icon="sap-icon://decline"
 										text="Estornar Contabilizaçao"
 										type="Reject"
+										press="onAccountPost"
 									/>
 								</f:SimpleForm>
 							</blocks>
@@ -250,7 +252,8 @@
 							<blocks>
 								<smartTable:SmartTable
 									id="Contabilization"
-									entitySet="InvoiceHeaderSet"
+									entitySet="AccountingSet"
+									tableBindingPath="GetAccountingItems"
 									tableType="Table"
 									useExportToExcel="true"
 									beforeExport="onBeforeExport"
@@ -259,8 +262,9 @@
 									persistencyKey="SmartTableAnalytical_Explored"
 									enableAutoBinding="true"
 									class="sapUiResponsiveContentPadding"
-									initiallyVisibleFields="Invoice,Vendor"
-								>
+									initiallyVisibleFields="Vendor,Invoice,AccountDocumentCompany,
+									AccountDocumentNum,AccountDocumentYear,AccountDocumentItem,VendorName,Currency,Account,
+									AccountVendor,DebtCreditIndicator,ItemText,Amount">
 									<!-- layout data used to make the table growing but the filter bar fixed -->
 									<smartTable:layoutData>
 										<m:FlexItemData
@@ -310,5 +314,12 @@
 		<semantic:messagesIndicator>
 			<semantic:MessagesIndicator press="onMessagesButtonPress"/>
 		</semantic:messagesIndicator>
+		<semantic:customFooterContent>
+			<m:Button 
+				icon="sap-icon://delete"
+				text="{i18n>deleteMessages}"
+				press="onClearMessages"
+			/>
+		</semantic:customFooterContent>
 	</semantic:DetailPage>
 </mvc:View>

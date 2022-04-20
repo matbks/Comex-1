@@ -5,14 +5,16 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
     "sap/m/MessagePopover",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/ui/core/MessageType",
   ],
   function (
     BaseController,
     JSONModel,
     formatter,
     MessagePopover,
-    MessageBox
+    MessageBox,
+    MessageType
   ) {
     "use strict";
 
@@ -56,14 +58,15 @@ sap.ui.define(
 
         var oMessageProcessor =
           new sap.ui.core.message.ControlMessageProcessor();
-        var oMessageManager = sap.ui.getCore().getMessageManager();
 
-        oMessageManager.registerMessageProcessor(oMessageProcessor);
+        this._oMessageManager = sap.ui.getCore().getMessageManager();
 
-        oMessageManager.addMessages(
+        this._oMessageManager.registerMessageProcessor(oMessageProcessor);
+
+        this._oMessageManager.addMessages(
           new sap.ui.core.message.Message({
             message: "Something wrong happened",
-            type: sap.ui.core.MessageType.Error,
+            type: MessageType.Error,
             processor: oMessageProcessor,
           })
         );
@@ -100,13 +103,17 @@ sap.ui.define(
         }
       },
 
+      onClearMessages: function (oEvent) {
+        this._oMessageManager.removeAllMessages();
+      },
+
       onNfWritePost: function (oEvent) {
         var payload = oEvent.getSource().getBindingContext().getObject();
-        if (payload.NfeDocument === ''){
-          payload.Action = 'D';
-        } else { 
-          return
-        };
+        if (payload.NfeDocument === "") {
+          payload.Action = "D";
+        } else {
+          return;
+        }
 
         var oModel = this.getView().getModel();
         oModel.create("/InvoiceHeaderSet", payload, {
@@ -157,6 +164,24 @@ sap.ui.define(
           payload.Action = "B";
         } else {
           payload.Action = "F";
+        }
+        var oModel = this.getView().getModel();
+        oModel.create("/InvoiceHeaderSet", payload, {
+          success: function (oData, oResponse) {
+            debugger;
+          }.bind(this),
+          error: function (oError) {
+            debugger;
+          }.bind(this),
+        });
+      },
+      onAccountPost: function (oEvent) {
+        debugger;
+        var payload = oEvent.getSource().getBindingContext().getObject();
+        if (payload.AccountDocument === "") {
+          payload.Action = "E";
+        } else {
+          payload.Action = "I";
         }
         var oModel = this.getView().getModel();
         oModel.create("/InvoiceHeaderSet", payload, {

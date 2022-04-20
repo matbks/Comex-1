@@ -46,8 +46,8 @@
 			<ColumnListItem vAlign="Middle">
 				<cells>
 					<ObjectIdentifier
-						title="{InvoiceIssuer}"
-						text="{InvoiceIssuerName}"
+						title="{InvoiceIssuerName}"
+						text="{InvoiceIssuer}"
 					/>
 					<Text
 						text="{
