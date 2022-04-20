@@ -4,8 +4,6 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
 	xmlns="sap.uxap"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
 >
 	<semantic:DetailPage
@@ -82,7 +80,7 @@
 								type="XML"
 						/>
 					</ObjectPageSection>
-						<ObjectPageSection title="{i18n>history}"">
+						<ObjectPageSection title="{i18n>history}">
 							<core:Fragment
 								fragmentName="comex.zcomexapp.fragment.History"
 								type="XML"

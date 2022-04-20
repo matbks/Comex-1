@@ -33,6 +33,7 @@
       "@sap/ux-ui5-tooling"
     ]
   },
-  "sapuxLayer": "CUSTOMER_BASE"
-  
+  "sapuxLayer": "CUSTOMER_BASE",
+  "author": "",
+  "license": "ISC"
 }
