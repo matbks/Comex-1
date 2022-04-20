@@ -1,0 +1,65 @@
+<c:FragmentDefinition
+xmlns:m="sap.m"
+xmlns:c="sap.ui.core"
+xmlns:f="sap.ui.layout.form"
+xmlns="sap.uxap"
+>
+	<ObjectPageSubSection>
+		<blocks>
+			<f:SimpleForm
+				editable="true"
+				layout="ResponsiveGridLayout"
+				title=""
+				labelSpanXL="4"
+				labelSpanL="4"
+				labelSpanM="12"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="0"
+				emptySpanL="0"
+				emptySpanM="0"
+				emptySpanS="0"
+				columnsXL="2"
+				columnsL="2"
+				columnsM="1"
+				singleContainerFullSize="false"
+			>
+				<f:content>
+					<m:Label
+						text="{i18n>document}"
+						visible="{=${Nfe} !== '' }"
+					/>
+					<m:Text
+						text="{NfeDocument}"
+						visible="{=${Nfe} !== '' }"
+					/>
+					<m:Label
+						text="{i18n>postingDate}"
+						visible="{=${Nfe} !== '' }"
+					/>
+					<m:Text
+						text="{NfePostingDate}"
+						visible="{=${Nfe} !== '' }"
+					/>
+				</f:content>
+				<m:Button
+					width="100%"
+					icon="sap-icon://accept"
+					text="{i18n>postingNfe}"
+					type="Accept"
+					press="onNfWritePost"
+					visible="{=${Nfe} === '' }"
+				/>
+				<m:Button
+					width="100%"
+					icon="sap-icon://reject"
+					text="{i18n>reverseNfe}"
+					type="Reject"
+					press="onNfWritePost"
+					visible="false"
+				/>
+			</f:SimpleForm>
+		</blocks>
+	</ObjectPageSubSection>
+
+</c:FragmentDefinition>

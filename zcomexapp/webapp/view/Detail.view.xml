@@ -5,7 +5,6 @@
 	xmlns:semantic="sap.m.semantic"
 	xmlns="sap.uxap"
 	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:layout="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
 >
@@ -36,7 +35,7 @@
 						isObjectTitleAlwaysVisible="false"
 						showPlaceholder="true"
 					>
-						<actions>
+						<!-- <actions>
 							<ObjectPageHeaderActionButton
 								icon="sap-icon://pull-down"
 								text="show section"
@@ -47,7 +46,7 @@
 								text="show state"
 								type="Emphasized"
 							/>
-						</actions>
+						</actions> -->
 					</ObjectPageHeader>
 				</headerTitle>
 				<headerContent>
@@ -58,100 +57,10 @@
 				</headerContent>
 				<sections>
 					<ObjectPageSection title="{i18n>vendorInvoice}">
-						<ObjectPageSubSection title="{i18n>document}">
-							<blocks>
-								<f:SimpleForm
-									id="SimpleFormChange480_12120"
-									editable="true"
-									layout="ResponsiveGridLayout"
-									title=""
-									labelSpanXL="4"
-									labelSpanL="4"
-									labelSpanM="12"
-									labelSpanS="12"
-									adjustLabelSpan="false"
-									emptySpanXL="0"
-									emptySpanL="0"
-									emptySpanM="0"
-									emptySpanS="0"
-									columnsXL="2"
-									columnsL="2"
-									columnsM="1"
-									singleContainerFullSize="false"
-								>
-									<f:content>
-										<m:Label
-											text="{i18n>invoice}"
-											visible="{= ${VendorInvoice} !== ''}"
-										/>
-										<m:Text
-											text="{VendorInvoice}/{VendorInvoiceYear}"
-											visible="{= ${VendorInvoice} !== ''}"
-										/>
-										<m:Label
-											text="{i18n>postingDate}"
-											visible="{= ${VendorInvoice} !== ''}"
-										/>
-										<m:Text
-											text="{
-												path: 'VendorInvoiceDate',
-												type: 'sap.ui.model.type.Date',
-												formatOptions: {
-													style: 'short'
-												}
-											}"
-											visible="{= ${VendorInvoice} !== ''}"
-										/>
-										<m:Label
-											text="{i18n>createdOn}"
-											visible="{= ${VendorInvoice} !== ''}"
-										/>
-										<m:Text
-											text="{
-												path: 'VendorInvoiceCreatedOn',
-												type: 'sap.ui.model.type.DateTime',
-												formatOptions: {
-													style: 'medium'
-												}
-											}"
-											visible="{= ${VendorInvoice} !== ''}"
-										/>
-									</f:content>
-									<m:Button
-										width="200px"
-										icon="sap-icon://accept"
-										text="Lançar Fatura"
-										type="Accept"
-										visible="{= ${VendorInvoice} === ''}"
-										press="onInvoicePost"
-									/>
-									<m:Button
-										width="200px"
-										icon="sap-icon://decline"
-										text="Estornar"
-										type="Reject"
-										visible="{= ${VendorInvoice} !== ''}"
-										press="onInvoicePost"
-									/>
-								</f:SimpleForm>
-							</blocks>
-						</ObjectPageSubSection>
-						<ObjectPageSubSection title="{i18n>invoiceItems}">
-							<blocks>
-								<smartTable:SmartTable
-									id="InvoiceItemsSmartTable"
-									entitySet="InvoiceItemsSet"
-									tableBindingPath="GetInvoiceItems"
-									tableType="ResponsiveTable"
-									header=""
-									persistencyKey="SmartTableAnalytical_Explored"
-									showFullScreenButton="true"
-									enableAutoBinding="true"
-									class="sapUiResponsiveContentPadding"
-									initiallyVisibleFields="InvoiceItem,PurchaseOrder,PurchaseItem,Material,MaterialDescription,Quantity,Amount"
-								/>
-							</blocks>
-						</ObjectPageSubSection>
+						<core:Fragment
+								fragmentName="comex.zcomexapp.fragment.Document"
+								type="XML"
+							/>
 					</ObjectPageSection>
 					<ObjectPageSection title="{i18n>laterDebts}">
 						<ObjectPageSubSection>
@@ -161,165 +70,36 @@
 							/>
 						</ObjectPageSubSection>
 					</ObjectPageSection>
-					<ObjectPageSection title="NF-E Manual">
-						<ObjectPageSubSection>
-							<blocks>
-								<f:SimpleForm
-									id="Manul"
-									editable="true"
-									layout="ResponsiveGridLayout"
-									title=""
-									labelSpanXL="4"
-									labelSpanL="4"
-									labelSpanM="12"
-									labelSpanS="12"
-									adjustLabelSpan="false"
-									emptySpanXL="0"
-									emptySpanL="0"
-									emptySpanM="0"
-									emptySpanS="0"
-									columnsXL="2"
-									columnsL="2"
-									columnsM="1"
-									singleContainerFullSize="false"
-								>
-									<f:content>
-										<m:Label text="Nº Documento"/>
-										<m:Text text="549204"/>
-										<m:Label text="Data Lançamento"/>
-										<m:Text text="16.09.2021"/>
-									</f:content>
-									<m:Button
-										width="300px"
-										icon="sap-icon://accept"
-										text="Lançar NF-e"
-										type="Accept"
-										press="onInvoicePost"
-									/>
-								</f:SimpleForm>
-							</blocks>
-						</ObjectPageSubSection>
+					<ObjectPageSection title="{i18n>manualNfe}">
+						<core:Fragment
+								fragmentName="comex.zcomexapp.fragment.ManualNfe"
+								type="XML"
+						/>
 					</ObjectPageSection>
-					<ObjectPageSection title="Contabilização">
-						<ObjectPageSubSection>
-							<blocks>
-								<f:SimpleForm
-									id="Contabilizations"
-									editable="true"
-									layout="ResponsiveGridLayout"
-									title=""
-									labelSpanXL="4"
-									labelSpanL="4"
-									labelSpanM="12"
-									labelSpanS="12"
-									adjustLabelSpan="false"
-									emptySpanXL="0"
-									emptySpanL="0"
-									emptySpanM="0"
-									emptySpanS="0"
-									columnsXL="2"
-									columnsL="2"
-									columnsM="1"
-									singleContainerFullSize="false"
-								>
-									<f:content>
-										<m:Label text="Documento Contábil"/>
-										<m:Text text="{AccountDocument}{AccountDocumentCompany}/{AccountDocumentYear}"/>
-										<m:Label text="Data Lançamento"/>
-										<m:Text text="16.09.2021"/>
-									</f:content>
-									<m:Button
-										width="220px"
-										icon="sap-icon://accept"
-										text="Lançar Contabilização"
-										type="Accept"
-										press="onAccountPost"
-									/>
-									<m:Button
-										width="220px"
-										icon="sap-icon://decline"
-										text="Estornar Contabilizaçao"
-										type="Reject"
-										press="onAccountPost"
-									/>
-								</f:SimpleForm>
-							</blocks>
-						</ObjectPageSubSection>
-						<ObjectPageSubSection
-							title="Conta Contábil"
-							titleUppercase="true"
-						>
-							<blocks>
-								<smartTable:SmartTable
-									id="Contabilization"
-									entitySet="AccountingSet"
-									tableBindingPath="GetAccountingItems"
-									tableType="Table"
-									useExportToExcel="true"
-									beforeExport="onBeforeExport"
-									useVariantManagement="false"
-									useTablePersonalisation="true"
-									persistencyKey="SmartTableAnalytical_Explored"
-									enableAutoBinding="true"
-									class="sapUiResponsiveContentPadding"
-									initiallyVisibleFields="Vendor,Invoice,AccountDocumentCompany,
-									AccountDocumentNum,AccountDocumentYear,AccountDocumentItem,VendorName,Currency,Account,
-									AccountVendor,DebtCreditIndicator,ItemText,Amount">
-									<!-- layout data used to make the table growing but the filter bar fixed -->
-									<smartTable:layoutData>
-										<m:FlexItemData
-											growFactor="1"
-											baseSize="0%"
-										/>
-									</smartTable:layoutData>
-								</smartTable:SmartTable>
-							</blocks>
-						</ObjectPageSubSection>
+					<ObjectPageSection title="{i18n>accounting}">
+						<core:Fragment
+								fragmentName="comex.zcomexapp.fragment.Accounting"
+								type="XML"
+						/>
 					</ObjectPageSection>
-					<ObjectPageSection title="Histórico">
-						<ObjectPageSubSection>
-							<m:HBox>
-								<m:VBox>
-									<m:Label text="Forma de Pagamento"/>
-									<m:RadioButtonGroup
-										id="Paymsewrssent"
-										columns="4"
-										width="100%"
-										class="sapUiMediumMarginBottom"
-									>
-										<m:RadioButton
-											id="Paymendewrst-s1"
-											text="Cartão de Crédito"
-										/>
-										<m:RadioButton
-											id="Paymerewfsnt-s2"
-											text="Cartão de Débito"
-										/>
-										<m:RadioButton
-											id="paysmerwednts-3"
-											text="Pix"
-										/>
-										<m:RadioButton
-											id="paymefrewsnt-s4"
-											text="Dinheiro"
-										/>
-									</m:RadioButtonGroup>
-								</m:VBox>
-							</m:HBox>
-						</ObjectPageSubSection>
-					</ObjectPageSection>
-				</sections>
-			</ObjectPageLayout>
-		</semantic:content>
-		<semantic:messagesIndicator>
-			<semantic:MessagesIndicator press="onMessagesButtonPress"/>
-		</semantic:messagesIndicator>
-		<semantic:customFooterContent>
-			<m:Button 
-				icon="sap-icon://delete"
-				text="{i18n>deleteMessages}"
-				press="onClearMessages"
-			/>
-		</semantic:customFooterContent>
-	</semantic:DetailPage>
-</mvc:View>
+						<ObjectPageSection title="{i18n>history}"">
+							<core:Fragment
+								fragmentName="comex.zcomexapp.fragment.History"
+								type="XML"
+						/>
+						</ObjectPageSection>
+					</sections>
+				</ObjectPageLayout>
+			</semantic:content>
+			<semantic:messagesIndicator>
+				<semantic:MessagesIndicator press="onMessagesButtonPress"/>
+			</semantic:messagesIndicator>
+			<semantic:customFooterContent>
+				<m:Button
+					icon="sap-icon://delete"
+					text="{i18n>deleteMessages}"
+					press="onClearMessages"
+				/>
+			</semantic:customFooterContent>
+		</semantic:DetailPage>
+	</mvc:View>

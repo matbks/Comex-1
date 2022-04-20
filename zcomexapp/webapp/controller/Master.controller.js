@@ -279,7 +279,7 @@ sap.ui.define(
             ],
             beginButton: new sap.m.Button(this.createId("buttonUpload"), {
               type: "Emphasized",
-              text: "{i18n>upload}",
+              text: this.getResourceBundle().getText("upload"),
               visible: "{masterView>/uploadButton}",
               press: this._onLoadData.bind(this),
             }),

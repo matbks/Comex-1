@@ -216,6 +216,45 @@ sap.ui.define(
         });
       },
 
+      onLaterDebtsDetailPress: function (oEvent) {
+        var that = this;
+        var laterDebtPath = oEvent.getSource().getBindingContext().getPath();
+        var path = laterDebtPath + "/" + "GetLaterDebtItems";
+
+        if (!this._oTableDetailDialog) {
+          this._oTableDetailDialog = new sap.m.Dialog({
+            title: this.getResourceBundle().getText("laterDebtsDetail"),
+            resizable: true,
+            draggable: true,
+            content: [
+              new sap.ui.comp.smarttable.SmartTable(
+                this.createId("LaterDebtSmartTableDetail"),
+                {
+                  entitySet: "LaterDebtItemsSet",
+                  tableBindingPath: "GetLaterDebtItems",
+                  tableType: "Table",
+                  useExportToExcel: true,
+                  showRowCount: true,
+                  enableAutoBinding: true,
+                  initiallyVisibleFields: "InvoiceIssuer",
+                }
+              ),
+            ],
+            endButton: new sap.m.Button({
+              text: "{i18n>close}",
+              press: function () {
+                this._oTableDetailDialog.close();
+              }.bind(this),
+            }),
+          });
+          this.byId("LaterDebtSmartTableDetail").bindElement(laterDebtPath);
+          this._oTableDetailDialog.addStyleClass("sapUiContentPadding");
+          this.getView().addDependent(this._oTableDetailDialog);
+        }
+
+        this._oTableDetailDialog.open();
+      },
+
       /* =========================================================== */
       /* begin: internal methods                                     */
       /* =========================================================== */

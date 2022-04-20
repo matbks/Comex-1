@@ -68,6 +68,7 @@
 						icon="sap-icon://detail-view"
 						width="50px"
 						iconDensityAware="false"
+						press="onLaterDebtsDetailPress"
 					/>
 					<Text
 						text="{LaterDebtDocument}/{LaterDebtDocumentYear}"

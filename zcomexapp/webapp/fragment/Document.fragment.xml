@@ -1,0 +1,100 @@
+<c:FragmentDefinition
+xmlns:m="sap.m"
+xmlns:c="sap.ui.core"
+xmlns:smartTable="sap.ui.comp.smarttable"
+xmlns:f="sap.ui.layout.form"
+xmlns="sap.uxap"
+>
+<ObjectPageSubSection title="{i18n>document}">
+	<blocks>
+		<f:SimpleForm
+			id="SimpleFormChange480_12120"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="12"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="1"
+			singleContainerFullSize="false"
+		>
+			<f:content>
+				<m:Label
+					text="{i18n>invoice}"
+					visible="{= ${VendorInvoice} !== ''}"
+				/>
+				<m:Text
+					text="{VendorInvoice}/{VendorInvoiceYear}"
+					visible="{= ${VendorInvoice} !== ''}"
+				/>
+				<m:Label
+					text="{i18n>postingDate}"
+					visible="{= ${VendorInvoice} !== ''}"
+				/>
+				<m:Text
+					text="{
+						path: 'VendorInvoiceDate',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							style: 'short'
+						}
+					}"
+					visible="{= ${VendorInvoice} !== ''}"
+				/>
+				<m:Label
+					text="{i18n>createdOn}"
+					visible="{= ${VendorInvoice} !== ''}"
+				/>
+				<m:Text
+					text="{
+						path: 'VendorInvoiceCreatedOn',
+						type: 'sap.ui.model.type.DateTime',
+						formatOptions: {
+							style: 'medium'
+						}
+					}"
+					visible="{= ${VendorInvoice} !== ''}"
+				/>
+			</f:content>
+			<m:Button
+				width="200px"
+				icon="sap-icon://accept"
+				text="Lançar Fatura"
+				type="Accept"
+				visible="{= ${VendorInvoice} === ''}"
+				press="onInvoicePost"
+			/>
+			<m:Button
+				width="200px"
+				icon="sap-icon://decline"
+				text="Estornar"
+				type="Reject"
+				visible="{= ${VendorInvoice} !== ''}"
+				press="onInvoicePost"
+			/>
+		</f:SimpleForm>
+	</blocks>
+</ObjectPageSubSection>
+<ObjectPageSubSection title="{i18n>invoiceItems}">
+	<blocks>
+		<smartTable:SmartTable
+			id="InvoiceItemsSmartTable"
+			entitySet="InvoiceItemsSet"
+			tableBindingPath="GetInvoiceItems"
+			tableType="ResponsiveTable"
+			persistencyKey="SmartTableAnalytical_Explored"
+			showFullScreenButton="true"
+			enableAutoBinding="true"
+			class="sapUiResponsiveContentPadding"
+			initiallyVisibleFields="InvoiceItem,PurchaseOrder,PurchaseItem,Material,MaterialDescription,Quantity,Amount"
+		/>
+	</blocks>
+</ObjectPageSubSection>
+</c:FragmentDefinition>

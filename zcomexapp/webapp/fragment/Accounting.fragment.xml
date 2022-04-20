@@ -1,0 +1,87 @@
+<c:FragmentDefinition
+	xmlns:m="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:f="sap.ui.layout.form"
+	xmlns="sap.uxap"
+>
+<ObjectPageSubSection>
+	<blocks>
+		<f:SimpleForm
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="12"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="1"
+			singleContainerFullSize="false"
+		>
+			<f:content>
+				<m:Label
+					text="{i18n>accountDocument}}"
+					visible="{=${AccountDocument} !== '' }"
+				/>
+				<m:Text
+					text="{AccountDocument}{AccountDocumentCompany}/{AccountDocumentYear}"
+					visible="{=${AccountDocument} !== '' }"
+				/>
+				<m:Label
+					text="{i18n>postingDate}"
+					visible="{=${AccountDocument} !== '' }"
+				/>
+				<m:Text
+					text="{AccountDocumentDate}"
+					visible="{=${AccountDocument} !== '' }"
+				/>
+			</f:content>
+			<m:Button
+				width="100%"
+				icon="sap-icon://accept"
+				text="{i18n>postingAccounting}"
+				type="Accept"
+				press="onAccountPost"
+				visible="{=${AccountDocument} === '' }"
+			/>
+			<m:Button
+				width="100%"
+				icon="sap-icon://decline"
+				text="{i18n>reverseAccounting}"
+				type="Reject"
+				press="onAccountPost"
+				visible="{=${AccountDocument} !== '' }"
+			/>
+		</f:SimpleForm>
+	</blocks>
+</ObjectPageSubSection>
+<ObjectPageSubSection
+	title="{i18n>ledgerAccount}"
+	titleUppercase="true"
+	>
+	<blocks>
+		<smartTable:SmartTable
+			entitySet="AccountingSet"
+			tableBindingPath="GetAccountingItems"
+			tableType="Table"
+			useExportToExcel="true"
+			beforeExport="onBeforeExport"
+			useVariantManagement="false"
+			useTablePersonalisation="true"
+			persistencyKey="SmartTableAnalytical_Explored"
+			enableAutoBinding="true"
+			class="sapUiResponsiveContentPadding"
+			initiallyVisibleFields="Vendor,Invoice,AccountDocumentCompany,
+			AccountDocumentNum,AccountDocumentYear,AccountDocumentItem,VendorName,Currency,Account,
+			AccountVendor,DebtCreditIndicator,ItemText,Amount"
+		/>
+		</blocks>
+	</ObjectPageSubSection>
+</c:FragmentDefinition>
